@@ -242,7 +242,7 @@ size_t u8_strlen(const char *s)
     return count;
 }
 
-#if defined(__WIN32__)
+#if defined(__WIN32__) || defined(__MORPHOS__)
 #include "wcwidth.c"
 #endif
 

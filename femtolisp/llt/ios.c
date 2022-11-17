@@ -955,7 +955,11 @@ char *ios_readline(ios_t *s)
     return ios_takebuf(&dest, &n);
 }
 
+#ifdef __MORPHOS__
+#    include "asprintf.c"
+#else
 int vasprintf(char **strp, const char *fmt, va_list ap);
+#endif
 
 int ios_vprintf(ios_t *s, const char *format, va_list args)
 {

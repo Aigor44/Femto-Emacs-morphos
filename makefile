@@ -2,12 +2,12 @@
 # makefile
 #
 
-CC      = cc
-CFLAGS  = -O -Wall -g
+CC      = gcc
+CFLAGS  = -O -Wall -g -I/work/opt/ncursesw/include/ncursesw -I/work/opt/ncursesw/include
 LLTDIR 	= ./femtolisp/llt
-LD      = cc
+LD      = gcc
 LDFLAGS =
-LIBS    = -lm -lncursesw
+LIBS    = -lm -L/work/opt/ncursesw/lib -lncursesw
 LISPLIBS = femtolisp/libflisp.a femtolisp/llt/libllt.a
 CP      = cp
 MV      = mv

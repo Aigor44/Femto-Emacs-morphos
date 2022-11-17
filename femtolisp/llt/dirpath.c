@@ -223,4 +223,15 @@ char *get_exename(char *buf, size_t size)
 	return NULL;
     return buf;
 }
+#elif defined(MORPHOS)
+char *get_exename(char *buf, size_t size)
+{
+    if ( size == 0 ) return NULL;    // guard.
+
+    static char * exename = "/work/home/aigor/workspace/curses-examples/Femto-Emacs-morphos/femtolisp/flisp";
+    size_t last = (size > strlen(exename)) ? strlen(exename) : size;
+    strncpy(buf, exename, last);
+    buf[(size > last) ? last : (last-1)] = '\0';
+    return buf;
+}
 #endif

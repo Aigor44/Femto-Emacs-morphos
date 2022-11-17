@@ -27,6 +27,8 @@
 #  define FREEBSD
 #elif defined(_WIN32)
 #  define WIN32
+#elif defined(__MORPHOS__)
+#  define MORPHOS
 #else
 #  error "unknown platform"
 #endif
@@ -88,6 +90,12 @@
 #  define BIG_ENDIAN     __BIG_ENDIAN
 #  define PDP_ENDIAN     __PDP_ENDIAN
 #  define BYTE_ORDER     __BYTE_ORDER
+#elif defined(MORPHOS)
+#  include <machine/endian.h>
+#  define __LITTLE_ENDIAN  LITTLE_ENDIAN
+#  define __BIG_ENDIAN     BIG_ENDIAN
+#  define __PDP_ENDIAN     PDP_ENDIAN
+#  define __BYTE_ORDER     BYTE_ORDER
 #else
 #  error "unknown platform"
 #endif
@@ -193,10 +201,12 @@ typedef u_ptrint_t uptrint_t;
 
 #define DBL_EPSILON      2.2204460492503131e-16
 #define FLT_EPSILON      1.192092896e-7
-#define DBL_MAX          1.7976931348623157e+308
-#define DBL_MIN          2.2250738585072014e-308
-#define FLT_MAX          3.402823466e+38
-#define FLT_MIN          1.175494351e-38
+#ifndef __MORPHOS__
+#    define DBL_MAX      1.7976931348623157e+308
+#    define DBL_MIN      2.2250738585072014e-308
+#    define FLT_MAX      3.402823466e+38
+#    define FLT_MIN      1.175494351e-38
+#endif
 #define LOG2_10          3.3219280948873626
 #define rel_zero(a, b) (fabs((a)/(b)) < DBL_EPSILON)
 #define sign_bit(r) ((*(int64_t*)&(r)) & BIT63)
